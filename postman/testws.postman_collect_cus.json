@@ -1,0 +1,297 @@
+{
+    "info": {
+        "_postman_id": "d040dd1d-7965-46dc-a6d9-c504f651e9d5",
+        "name": "testws",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Insert customers",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"should have key mongo_id\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('customer_id');",
+                            "})"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"id\" : \"050443\",\n    \"first_name\" : \"nattawan\",\n    \"last_name\" : \"wareerat\",\n    \"email\" : \"nattawan.w@ku.th\",\n    \"desired_product_details\" : \"THE FIRST STEP : TREASURE EFFECT Orange Ver.\",\n    \"shipment_of_goods\" : \"EMS\",\n    \"address\" : \"nonthaburi\",\n    \"telephone_number\" : \"0616139787\",\n    \"payment_amount\" : 690.0\n}\n"
+                },
+                "url": {
+                    "raw": "{{apiUrl}}/customers",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find customers",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 10 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(10);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/customers/",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find customers sort by id order by asc",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 10 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(10);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/customers/?sort_by=age&order=asc",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "sort_by",
+                            "value": "id"
+                        },
+                        {
+                            "key": "order",
+                            "value": "asc"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find customers sort by id order by desc",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 10 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(10);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/customers/?sort_by=id&order=desc",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "sort_by",
+                            "value": "id"
+                        },
+                        {
+                            "key": "order",
+                            "value": "desc"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update customers",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"should have key mongo_id\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('customer_id');",
+                            "})",
+                            "",
+                            "pm.test(\"should have key modified_count\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('modified_count');",
+                            "})"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"price\" : 690.0\n}"
+                },
+                "url": {
+                    "raw": "{{apiUrl}}/customers/050443",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers",
+                        "050443"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find customers by id",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 10 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data).length).to.eql(10);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/customers/050443",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers",
+                        "050443"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Delete customers",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"should have key mongo_id\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('customer_id');",
+                            "})",
+                            "",
+                            "pm.test(\"should have key deleted_count\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('deleted_count');",
+                            "})"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "var jsonData = pm.response.json();\n\npm.test(\"should have key mongo_id\", function () {\n    pm.expect(jsonData.data).to.have.property('customer_id');\n})\n\npm.test(\"should have key modified_count\", function () {\n    pm.expect(jsonData.data).to.have.property('deleted_count');\n})"
+                },
+                "url": {
+                    "raw": "{{apiUrl}}/customers/050443",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "customers",
+                        "050443"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}

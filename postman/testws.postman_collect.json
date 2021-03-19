@@ -1,0 +1,297 @@
+{
+    "info": {
+        "_postman_id": "d040dd1d-7965-46dc-a6d9-c504f651e9d5",
+        "name": "testws",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Insert albums",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"should have key mongo_id\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('album_id');",
+                            "})"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"id\" : \"0008\",\n    \"name_of_album\" : \"TREASURE EFFECT Blue Ver.\",\n    \"details_of_album\": [\"-Magnet Package Box + Sleeve\", \"-1 Disc\", \"-Photobook\", \"-Random Photocard File Folder\", \"-Lyrics Postcard Set\", \"-Random Hologram Postcard\", \"-Random Unit Polaroid\", \"-Random Baby Photocard\", \"-Random Photocard\", \"-Random selfie Photocard\", \"-Graphic Sticker\", \"-Random AR Photocard\", \"-AR Photocard Board\", \"-Double-Sided Poster\"],\n    \"size\" : \"215*155*32 mm.\",\n    \"weight\": \"700 g.\",\n    \"track_lists\": [\"-MY TREASURE\", \"-BE WITH ME\", \"-SLOWMOTION\", \"-BOY\", \"-COME TO ME\", \"-I LOVE YOU\", \"-BLING LIKE THIS\", \"-MMM\", \"-ORANGE\", \"-GOING CRAZY\", \"-I LOVE YOU (Piano Ver.)\", \"-MMM (Rock Ver.)\"],\n    \"price\" : 690.0\n}\n"
+                },
+                "url": {
+                    "raw": "{{apiUrl}}/albums",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find albums",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 8 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(8);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/albums/",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums",
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find albums sort by id order by asc",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 8 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(8);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/albums/?sort_by=age&order=asc",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "sort_by",
+                            "value": "id"
+                        },
+                        {
+                            "key": "order",
+                            "value": "asc"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find albums sort by id order by desc",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 8 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(8);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/albums/?sort_by=id&order=desc",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "sort_by",
+                            "value": "id"
+                        },
+                        {
+                            "key": "order",
+                            "value": "desc"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update albums",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"should have key mongo_id\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('album_id');",
+                            "})",
+                            "",
+                            "pm.test(\"should have key modified_count\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('modified_count');",
+                            "})"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"price\" : 690.0\n}"
+                },
+                "url": {
+                    "raw": "{{apiUrl}}/albums/0008",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums",
+                        "0008"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Find albums by id",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"Should return data json 8 fields\", function () {",
+                            "    pm.expect(Object.keys(jsonData.data).length).to.eql(8);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{apiUrl}}/albums/0008",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums",
+                        "0008"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Delete albums",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "",
+                            "pm.test(\"should have key mongo_id\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('album_id');",
+                            "})",
+                            "",
+                            "pm.test(\"should have key deleted_count\", function () {",
+                            "    pm.expect(jsonData.data).to.have.property('deleted_count');",
+                            "})"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "var jsonData = pm.response.json();\n\npm.test(\"should have key mongo_id\", function () {\n    pm.expect(jsonData.data).to.have.property('album_id');\n})\n\npm.test(\"should have key modified_count\", function () {\n    pm.expect(jsonData.data).to.have.property('deleted_count');\n})"
+                },
+                "url": {
+                    "raw": "{{apiUrl}}/albums/0008",
+                    "host": [
+                        "{{apiUrl}}"
+                    ],
+                    "path": [
+                        "albums",
+                        "0008"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
